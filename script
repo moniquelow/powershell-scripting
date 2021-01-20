@@ -1,0 +1,37 @@
+######
+For removing underscores from pdf titles and replace with the space character
+######
+
+get-childitem -recurse | rename-item -newname {$_.name -replace "_"," "}
+
+#####
+Replace the space character(s) with an underscore in all the filenames found in the current folder and the successive subfolders
+#####
+
+Get-ChildItem -Recurse -Force -Filter "* *" | Rename-Item -NewName { $_.Name -replace " ","_" }
+
+get-childitem | rename-item -newname {$_.name -replace "_"," "}
+
+#####
+Rename all PDF-files in a folder to lowercase
+#####
+
+Get-ChildItem *.pdf | Rename-Item -NewName { $_.Name.ToLower() }
+
+#####
+For changing ALL CAPS to Capitalize first letter
+#####
+
+Get-ChildItem -File | Rename-Item -NewName { "{0}{1}" -f ( Get-Culture ).TextInfo.ToTitlbaseeCase( $_.BaseName.ToLower() ), $_.Extension}
+
+#####
+Adding prefix name to front of doc title 
+#####
+
+get-childitem -recurse | rename-item -newname { "Prefix_" + $_.Name }
+
+
+SOURCES:
+# Source: Don Jones: "Appending text to the beginning of a variable file name" https://powershell.org/forums/topic/appending-text-to-the-beginning-of-a-variable-file-name/
+# Source: http://www.howtogeek.com/111859/how-to-batch-rename-files-in-windows-4-ways-to-rename-multiple-files/
+# Source: Ohad Schneider: "How can I bulk rename files in PowerShell?": http://stackoverflow.com/questions/13382638/how-can-i-bulk-rename-files-in-powershell/36241702#36241702
