@@ -22,7 +22,7 @@ Get-ChildItem *.pdf | Rename-Item -NewName { $_.Name.ToLower() }
 For changing ALL CAPS to Capitalize first letter
 #####
 
-Get-ChildItem -File | Rename-Item -NewName { "{0}{1}" -f ( Get-Culture ).TextInfo.ToTitlbaseeCase( $_.BaseName.ToLower() ), $_.Extension}
+Get-ChildItem -File | Rename-Item -NewName { "{0}{1}" -f ( Get-Culture ).TextInfo.ToTitleCase( $_.BaseName.ToLower() ), $_.Extension}
 
 #####
 Adding prefix name to front of doc title 
